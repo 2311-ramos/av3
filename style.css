@@ -1,0 +1,288 @@
+:root {
+  --papel: #f1ece1;
+  --branco: #ffffff;
+  --tinta: #111111;
+  --cinza: #5c5a55;
+  --vermelho: #d7191c;
+  --vermelho-escuro: #a80f12;
+  --sombra: 5px 5px 0 var(--tinta);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--papel);
+  color: var(--tinta);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2 {
+  font-family: 'Barlow Condensed', 'Arial Narrow', Impact, sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+a { color: var(--vermelho-escuro); font-weight: 700; }
+:focus-visible { outline: 3px solid var(--vermelho); outline-offset: 2px; }
+
+/* NAVBAR */
+header { background: var(--tinta); border-bottom: 6px solid var(--vermelho); }
+.navbar { padding: 8px 0 !important; }
+.navbar-brand img { height: 70px; width: auto; }
+.navbar-nav { gap: 6px; }
+.nav-link {
+  color: #e9e4d8 !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  padding: 8px 16px !important;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: var(--vermelho); color: #fff !important; }
+.nav-link.active { background: var(--papel); color: var(--tinta) !important; }
+
+/* LAYOUT */
+main { flex: 1; width: 100%; max-width: 1250px; margin: 0 auto; padding: 32px 20px; }
+main.centro { display: flex; justify-content: center; align-items: center; }
+.topo h1 { font-size: 3rem; line-height: 1; display: inline-block; border-bottom: 6px solid var(--vermelho); padding-bottom: 4px; }
+.topo > p { color: var(--cinza); margin: 12px 0 22px; font-weight: 500; }
+
+/* FILTROS */
+.barra-filtros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  align-items: end;
+  background: var(--branco);
+  border: 3px solid var(--tinta);
+  box-shadow: var(--sombra);
+  padding: 18px;
+}
+.campo-busca { grid-column: span 2; }
+.campo-filtro label, label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--tinta);
+}
+.campo-filtro input, .campo-filtro select, .input_texto {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--papel);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+}
+.campo-filtro input:focus, .campo-filtro select:focus, .input_texto:focus {
+  outline: none;
+  background: #fff;
+  box-shadow: 3px 3px 0 var(--vermelho);
+}
+.acoes-filtro { display: flex; gap: 10px; }
+
+button:not(.btn-close):not(.navbar-toggler):not(.dropdown-toggle), .btn_enviar {
+  padding: 10px 18px;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  background: var(--vermelho);
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--tinta);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+}
+button:not(.btn-close):not(.navbar-toggler):not(.dropdown-toggle):hover:not(:disabled), .btn_enviar:hover:not(:disabled) {
+  background: var(--vermelho-escuro);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--tinta);
+}
+button:not(.btn-close):not(.navbar-toggler):not(.dropdown-toggle):active:not(:disabled), .btn_enviar:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--tinta);
+}
+button:disabled, .btn_enviar:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.btn-secundario { background: var(--branco) !important; color: var(--tinta) !important; }
+.btn-secundario:hover:not(:disabled) { background: var(--papel) !important; }
+
+/* VITRINE: lista em linhas, cards escuros com etiqueta de preço */
+.vitrine { margin-top: 32px; }
+.lista-estoque { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 980px; margin: 0 auto; }
+.produto-estoque {
+  display: grid;
+  grid-template-columns: 170px 1fr 190px;
+  grid-template-areas:
+    "foto cat  preco"
+    "foto nome preco"
+    "foto desc acao"
+    "foto qtd  acao";
+  grid-template-rows: auto auto 1fr auto;
+  column-gap: 20px;
+  background: var(--tinta);
+  color: #fff;
+  border: 3px solid var(--tinta);
+  box-shadow: 7px 7px 0 var(--vermelho);
+  padding: 14px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.produto-estoque:hover { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--vermelho); }
+.produto-estoque img {
+  grid-area: foto;
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  background: #2a2a2a;
+  border: 2px solid #3a3a3a;
+}
+.produto-estoque .categoria {
+  grid-area: cat;
+  align-self: start;
+  justify-self: start;
+  color: var(--vermelho);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.produto-estoque h2 { grid-area: nome; font-size: 1.9rem; line-height: 1.05; margin: 4px 0 8px; color: #fff; }
+.produto-estoque .descricao { grid-area: desc; color: #cfcac0; font-size: 0.95rem; line-height: 1.45; align-self: start; }
+.preco {
+  grid-area: preco;
+  align-self: start;
+  background: var(--vermelho);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 8px;
+  border: 2px solid #fff;
+  transform: rotate(2deg);
+}
+.quantidade { grid-area: qtd; align-self: end; text-align: center; color: #cfcac0; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+.card-acoes { grid-area: acao; align-self: end; display: flex; flex-direction: column; gap: 10px; }
+.btn-carrinho { width: 100%; }
+.mensagem { grid-column: 1 / -1; text-align: center; color: var(--cinza); font-weight: 600; padding: 40px 0; }
+
+/* CARRINHO E PERFIL */
+.cabecalho-pagina { margin-bottom: 24px; }
+.cabecalho-pagina h1 { font-size: 2.6rem; display: inline-block; border-bottom: 6px solid var(--vermelho); padding-bottom: 4px; }
+.cabecalho-pagina p { color: var(--cinza); margin-top: 10px; }
+.lista-carrinho { display: grid; gap: 14px; }
+.item-carrinho {
+  display: grid;
+  grid-template-columns: 90px 1fr auto auto auto;
+  gap: 16px;
+  align-items: center;
+  background: var(--branco);
+  border: 3px solid var(--tinta);
+  box-shadow: var(--sombra);
+  padding: 14px;
+}
+.item-carrinho img { width: 90px; height: 90px; object-fit: cover; background: #2a2a2a; border: 2px solid var(--tinta); }
+.item-carrinho h2 { font-size: 1.4rem; }
+.item-carrinho .preco-item { font-weight: 800; color: var(--vermelho-escuro); }
+.contador-quantidade { display: flex; align-items: center; gap: 8px; }
+.contador-quantidade button { padding: 6px 12px; }
+.resumo-carrinho {
+  margin-top: 24px;
+  background: var(--tinta);
+  color: #fff;
+  border: 3px solid var(--tinta);
+  box-shadow: 7px 7px 0 var(--vermelho);
+  padding: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: end;
+  justify-content: space-between;
+}
+.resumo-carrinho label { color: #fff; }
+.resumo-carrinho select { padding: 10px 12px; border: 2px solid var(--tinta); background: var(--papel); color: var(--tinta); min-width: 200px; }
+.resumo-carrinho .total { font-size: 1.8rem; font-weight: 800; }
+.resumo-carrinho .acoes { display: flex; gap: 12px; flex-wrap: wrap; }
+.secao-compras { margin-top: 42px; }
+.secao-compras h2 { font-size: 2rem; display: inline-block; border-bottom: 5px solid var(--vermelho); }
+.lista-compras { display: grid; gap: 14px; margin-top: 18px; }
+.compra {
+  background: var(--branco);
+  border: 3px solid var(--tinta);
+  box-shadow: var(--sombra);
+  padding: 18px;
+}
+.compra header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.compra header strong { font-size: 1.1rem; }
+.compra ul { list-style: none; padding: 0; margin: 0 0 12px; }
+.compra li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #ccc; }
+.compra .total-compra { text-align: right; font-weight: 800; font-size: 1.2rem; color: var(--vermelho-escuro); }
+.aviso { padding: 18px; border: 3px dashed var(--tinta); background: var(--branco); color: var(--cinza); font-weight: 600; }
+.form-perfil { max-width: 640px; }
+.form-perfil .senha-opcional { color: var(--cinza); font-size: 0.8rem; font-weight: 600; margin-top: -10px; margin-bottom: 16px; }
+
+.paginacao { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 32px; }
+.info-pagina { font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* FORMULÁRIOS */
+form {
+  width: 100%;
+  max-width: 480px;
+  background: var(--branco);
+  border: 3px solid var(--tinta);
+  border-top: 10px solid var(--vermelho);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: 32px 28px;
+}
+form h1 { text-align: center; margin-bottom: 20px; font-size: 2.4rem; }
+.input_texto { margin-bottom: 16px; }
+.btn_enviar { width: 100%; padding: 13px; }
+.nota { text-align: center; margin-bottom: 16px; color: var(--cinza); }
+
+/* TOAST E RODAPÉ */
+.toast-area { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050; }
+.toast { border: 3px solid var(--tinta) !important; border-radius: 0 !important; box-shadow: var(--sombra); }
+footer {
+  background: var(--tinta);
+  border-top: 6px solid var(--vermelho);
+  padding: 18px;
+  text-align: center;
+  color: #e9e4d8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+@media (max-width: 700px) {
+  .produto-estoque {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "foto  foto"
+      "cat   preco"
+      "nome  preco"
+      "desc  desc"
+      "qtd   qtd"
+      "acao  acao";
+    grid-template-rows: auto;
+  }
+  .produto-estoque img { width: 100%; height: 190px; margin-bottom: 12px; }
+  .quantidade { text-align: left; margin-top: 8px; }
+  .card-acoes { width: 100%; }
+  .item-carrinho { grid-template-columns: 1fr; text-align: left; }
+  .item-carrinho img { width: 100%; height: 180px; }
+  .resumo-carrinho { flex-direction: column; align-items: stretch; }
+  .resumo-carrinho .acoes { flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+  .campo-busca { grid-column: span 1; }
+  .topo h1 { font-size: 2.1rem; }
+  form { padding: 24px 18px; }
+}
